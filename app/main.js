@@ -15,6 +15,11 @@ Vue.registerElement(
   () => require('nativescript-ui-sidedrawer').RadSideDrawer
 )
 
+Vue.registerElement(
+  'BarcodeScanner', 
+  () => require('nativescript-barcodescanner').BarcodeScannerView
+)
+
 new Vue({
   store,
   render: h => h('frame', [h(App)])
