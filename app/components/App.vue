@@ -16,31 +16,29 @@
                 <Label class="drawer-item" text="Item 3"/>
             </StackLayout>
 
-            <GridLayout ~mainContent columns="*" rows="*">
-                <Label class="message" :text="msg" col="0" row="0"/>
+            <GridLayout ~mainContent columns="*" rows="auto, auto, auto, auto, auto">
+                <Label row="0" class="message" text="Check the console log for scanned barcodes" textWrap="true"></Label>
+
+                <!-- <BarcodeScanner
+                    row="1"
+                    height="300"
+                    formats="QR_CODE, EAN_13, UPC_A"
+                    beepOnScan="true"
+                    reportDuplicates="true"
+                    preferFrontCamera="false"
+                    @scanResult="onScanResult"
+                    v-if="isIOS">
+                </BarcodeScanner> -->
+
+                <Button row="1" class="btn btn-primary btn-rounded-sm" text="Scan place" @tap="doScanWithBackCamera"></Button>
+                <Button row="2" class="btn btn-primary btn-rounded-sm" text="Places" @tap="navigateToPlaces()"></Button>
+                <Button row="3" class="btn btn-primary btn-rounded-sm" text="Notification" @tap="navigateToNotifications()"></Button>
+                <Button row="4" class="btn btn-primary btn-rounded-sm" text="Information" @tap="navigateToInformations()"></Button>
+                <!-- <Button row="3" class="btn btn-primary btn-rounded-sm" text="front camera, no flip" @tap="doScanWithFrontCamera"></Button> -->
+
             </GridLayout>
         </RadSideDrawer>
 
-        <Label text="test fdgfd  fdgfd gfdg dfgfd"/>
-
-        <GridLayout columns="*" rows="auto, auto, auto, auto">
-        <Label row="0" class="message" text="Check the console log for scanned barcodes" textWrap="true"></Label>
-
-        <!-- <BarcodeScanner
-            row="1"
-            height="300"
-            formats="QR_CODE, EAN_13, UPC_A"
-            beepOnScan="true"
-            reportDuplicates="true"
-            preferFrontCamera="false"
-            @scanResult="onScanResult"
-            v-if="isIOS">
-        </BarcodeScanner> -->
-
-        <Button row="2" class="btn btn-primary btn-rounded-sm" text="back camera, with flip" @tap="doScanWithBackCamera"></Button>
-        <!-- <Button row="3" class="btn btn-primary btn-rounded-sm" text="front camera, no flip" @tap="doScanWithFrontCamera"></Button> -->
-
-        </GridLayout>
 
     </Page>
 </template>
@@ -48,6 +46,9 @@
 <script >
   import {isIOS} from "tns-core-modules/platform";
   import {BarcodeScanner} from "nativescript-barcodescanner";
+  import Places from "./Places";
+  import Notification from "./Notification";
+  import Information from "./Information";
 
   export default {
     data() {
@@ -60,48 +61,78 @@
 
     },
     methods: {
-      onScanResult(evt) {
-        console.log(`onScanResult: ${evt.text} (${evt.format})`);
-      },
-      doScanWithBackCamera() {
-        this.scan(false);
-      },
-      doScanWithFrontCamera() {
-        this.scan(true);
-      },
-      scan(front) {
-        new BarcodeScanner().scan({
-          cancelLabel: "EXIT. Also, try the volume buttons!", // iOS only, default 'Close'
-          cancelLabelBackgroundColor: "#333333", // iOS only, default '#000000' (black)
-          message: "Use the volume buttons for extra light", // Android only, default is 'Place a barcode inside the viewfinder rectangle to scan it.'
-          preferFrontCamera: front,     // Android only, default false
-          showFlipCameraButton: true,   // default false
-          showTorchButton: true,        // iOS only, default false
-          torchOn: false,               // launch with the flashlight on (default false)
-          resultDisplayDuration: 500,   // Android only, default 1500 (ms), set to 0 to disable echoing the scanned text
-          beepOnScan: true,             // Play or Suppress beep on scan (default true)
-          openSettingsIfPermissionWasPreviouslyDenied: true, // On iOS you can send the user to the settings app if access was previously denied
-          closeCallback: () => {
-            console.log("Scanner closed @ " + new Date().getTime());
-          }
-        }).then(
-            function (result) {
-              console.log("--- scanned: " + result.text);
-              // Note that this Promise is never invoked when a 'continuousScanCallback' function is provided
-              setTimeout(function () {
-                // if this alert doesn't show up please upgrade to {N} 2.4.0+
-                alert({
-                  title: "Scan result",
-                  message: "Format: " + result.format + ",\nValue: " + result.text,
-                  okButtonText: "OK"
-                });
-              }, 500);
-            },
-            function (errorMessage) {
-              console.log("No scan. " + errorMessage);
+        navigateToPlaces(){
+            this.$navigateTo(Places, {
+                animated: true,
+                transition: {
+                    name: "slideLeft",
+                    duration: 250,
+                    curve: "easeIn"
+                }
+            });
+        },
+        navigateToNotifications(){
+           this.$navigateTo(Notification, {
+                animated: true,
+                transition: {
+                    name: "slideLeft",
+                    duration: 250,
+                    curve: "easeIn"
+                }
+            });
+        },
+        navigateToInformations(){
+           this.$navigateTo(Information, {
+                animated: true,
+                transition: {
+                    name: "slideLeft",
+                    duration: 250,
+                    curve: "easeIn"
+                }
+            });
+        },
+        onScanResult(evt) {
+            console.log(`onScanResult: ${evt.text} (${evt.format})`);
+        },
+        doScanWithBackCamera() {
+            this.scan(false);
+        },
+        doScanWithFrontCamera() {
+            this.scan(true);
+        },
+        scan(front) {
+            new BarcodeScanner().scan({
+            cancelLabel: "EXIT. Also, try the volume buttons!", // iOS only, default 'Close'
+            cancelLabelBackgroundColor: "#333333", // iOS only, default '#000000' (black)
+            message: "Use the volume buttons for extra light", // Android only, default is 'Place a barcode inside the viewfinder rectangle to scan it.'
+            preferFrontCamera: front,     // Android only, default false
+            showFlipCameraButton: true,   // default false
+            showTorchButton: true,        // iOS only, default false
+            torchOn: false,               // launch with the flashlight on (default false)
+            resultDisplayDuration: 500,   // Android only, default 1500 (ms), set to 0 to disable echoing the scanned text
+            beepOnScan: true,             // Play or Suppress beep on scan (default true)
+            openSettingsIfPermissionWasPreviouslyDenied: true, // On iOS you can send the user to the settings app if access was previously denied
+            closeCallback: () => {
+                console.log("Scanner closed @ " + new Date().getTime());
             }
-        );
-      }
+            }).then(
+                function (result) {
+                console.log("--- scanned: " + result.text);
+                // Note that this Promise is never invoked when a 'continuousScanCallback' function is provided
+                setTimeout(function () {
+                    // if this alert doesn't show up please upgrade to {N} 2.4.0+
+                    alert({
+                    title: "Scan result",
+                    message: "Format: " + result.format + ",\nValue: " + result.text,
+                    okButtonText: "OK"
+                    });
+                }, 500);
+                },
+                function (errorMessage) {
+                console.log("No scan. " + errorMessage);
+                }
+            );
+        }
 
 
     },

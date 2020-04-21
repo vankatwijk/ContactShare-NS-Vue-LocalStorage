@@ -16,22 +16,36 @@
                 <Label class="drawer-item" text="Item 3"/>
             </StackLayout>
 
-            <GridLayout ~mainContent columns="*" rows="*">
-                <Label class="message" :text="msg" col="0" row="0"/>
+            <GridLayout ~mainContent columns="*" rows="auto, auto, auto, auto, auto">
+                <Label row="0" class="message" text="some text" textWrap="true"></Label>
+                <Button row="1" class="btn btn-primary btn-rounded-sm" text="Home" @tap="navigateToHome()"></Button>
+
             </GridLayout>
         </RadSideDrawer>
 
-        <Label text="test fdgfd  fdgfd gfdg dfgfd"/>
 
     </Page>
 </template>
 
 <script >
+  import Home from "./App";
   export default {
     data() {
       return {
         msg: 'Hello World!'
       }
+    },
+    methods: {
+        navigateToHome(){
+            this.$navigateTo(Home, {
+                animated: true,
+                transition: {
+                    name: "slideRight",
+                    duration: 250,
+                    curve: "easeIn"
+                }
+            });
+        }
     }
   }
 </script>
