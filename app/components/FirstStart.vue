@@ -2,10 +2,11 @@
     <Page>
         <ActionBar>
             <GridLayout width="100%" columns="auto, *">
-                <Label text="MENU" @tap="$refs.drawer.nativeView.showDrawer()" col="0"/>
-                <Label class="title" text="Welcome to NativeScript-Vue!"  col="1"/>
+                <Label text="MENU" @tap="$refs.drawer.nativeView.showDrawer()" col="0" />
+                <Label class="title" text="Welcome to NativeScript-Vue!" col="1" />
             </GridLayout>
         </ActionBar>
+
 
         <RadSideDrawer ref="drawer">
             <StackLayout ~drawerContent backgroundColor="#ffffff">
@@ -23,30 +24,45 @@
             </GridLayout>
         </RadSideDrawer>
 
+
+
     </Page>
 </template>
 
-<script >
-  import Home from "./App";
-  export default {
-    data() {
-      return {
-        msg: 'Hello World!'
-      }
-    },
-    methods: {
-        navigateToHome(){
-            this.$navigateTo(Home, {
-                animated: true,
-                transition: {
-                    name: "slideRight",
-                    duration: 250,
-                    curve: "easeIn"
-                }
-            });
+<script>
+    import Home from "./App";
+    import {
+        getBoolean,
+        setBoolean,
+        getNumber,
+        setNumber,
+        getString,
+        setString,
+        hasKey,
+        remove,
+        clear} from "tns-core-modules/application-settings";
+
+    export default {
+        data() {
+            return {
+                msg: 'Hello World!'
+            }
+        },
+        methods: {
+            navigateToHome() {
+                setBoolean("isFirstRun",false);
+
+                this.$navigateTo(Home, {
+                    animated: true,
+                    transition: {
+                        name: "slideRight",
+                        duration: 250,
+                        curve: "easeIn"
+                    }
+                });
+            }
         }
     }
-  }
 </script>
 
 <style scoped>

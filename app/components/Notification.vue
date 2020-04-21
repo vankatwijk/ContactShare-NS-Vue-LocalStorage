@@ -8,7 +8,7 @@
         </ActionBar>
 
         <RadSideDrawer ref="drawer">
-            <StackLayout drawerContent backgroundColor="#ffffff">
+            <StackLayout ~drawerContent backgroundColor="#ffffff">
                 <Label class="drawer-header" text="Drawer"/>
 
                 <Label class="drawer-item" text="Item 1"/>
