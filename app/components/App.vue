@@ -38,6 +38,8 @@
                     @tap="navigateToNotifications()"></Button>
                 <Button row="4" class="btn btn-primary btn-rounded-sm" text="Information"
                     @tap="navigateToInformations()"></Button>
+                <Button row="4" class="btn btn-primary btn-rounded-sm" text="My Information"
+                    @tap="navigateToMyInformation()"></Button>
                 <!-- <Button row="3" class="btn btn-primary btn-rounded-sm" text="front camera, no flip" @tap="doScanWithFrontCamera"></Button> -->
 
             </GridLayout>
@@ -111,6 +113,16 @@
             },
             navigateToInformations() {
                 this.$navigateTo(Information, {
+                    animated: true,
+                    transition: {
+                        name: "slideLeft",
+                        duration: 250,
+                        curve: "easeIn"
+                    }
+                });
+            },
+            navigateToMyInformation() {
+                this.$navigateTo(FirstStart, {
                     animated: true,
                     transition: {
                         name: "slideLeft",

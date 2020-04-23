@@ -19,7 +19,16 @@
 
             <GridLayout ~mainContent columns="*" rows="auto, auto, auto, auto, auto">
                 <Label row="0" class="message" text="some text" textWrap="true"></Label>
-                <Button row="1" class="btn btn-primary btn-rounded-sm" text="Home" @tap="navigateToHome()"></Button>
+
+                <TextField :text="personaldata.firstname" hint="First name" />
+                <TextField :text="personaldata.lastname" hint="Last name" />
+                <TextField :text="personaldata.street" hint="Street" />
+                <TextField :text="personaldata.zip" hint="zip" />
+                <TextField :text="personaldata.country" hint="country" />
+                <TextField :text="personaldata.phone" hint="phone" />
+                <TextField :text="personaldata.email" hint="email" />
+
+                <Button row="1" class="btn btn-primary btn-rounded-sm" text="Home" @tap="Save()"></Button>
 
             </GridLayout>
         </RadSideDrawer>
@@ -45,12 +54,26 @@
     export default {
         data() {
             return {
-                msg: 'Hello World!'
+                msg: 'Hello World!',
+                personaldata:{}
             }
         },
         methods: {
-            navigateToHome() {
+            Save() {
+
                 setBoolean("isFirstRun",false);
+
+                let personaldata = this.personaldata;
+                // {
+                //     "firstname": this.personaldata.FirstName,
+                //     "lastname":this.personaldata.LastName,
+                //     "street":this.personaldata.Street,
+                //     "zip":this.personaldata.ZIP,
+                //     "country":this.personaldata.Country,
+                //     "phone":this.personaldata.Phone,
+                //     "email":this.personaldata.Email
+                // };
+                
 
                 this.$navigateTo(Home, {
                     animated: true,
