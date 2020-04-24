@@ -74,8 +74,7 @@
     export default {
         data() {
             return {
-                isIOS,
-                msg: 'Hello World!'
+                isIOS
             }
         },
         mounted() {
@@ -141,6 +140,7 @@
                 this.scan(true);
             },
             scan(front) {
+
                 new BarcodeScanner().scan({
                     cancelLabel: "EXIT. Also, try the volume buttons!", // iOS only, default 'Close'
                     cancelLabelBackgroundColor: "#333333", // iOS only, default '#000000' (black)
@@ -156,9 +156,17 @@
                         console.log("Scanner closed @ " + new Date().getTime());
                     }
                 }).then(
-                    function (result) {
+                    (result) => {
                         console.log("--- scanned: " + result.text);
                         // Note that this Promise is never invoked when a 'continuousScanCallback' function is provided
+
+
+                        this.$store.dispatch("insertScan",{
+                            title: "Some Place",
+                            data: result,
+                            timestamp: Date.now()
+                        });
+
                         setTimeout(function () {
                             // if this alert doesn't show up please upgrade to {N} 2.4.0+
                             alert({
@@ -166,9 +174,10 @@
                                 message: "Format: " + result.format + ",\nValue: " + result.text,
                                 okButtonText: "OK"
                             });
+
                         }, 500);
                     },
-                    function (errorMessage) {
+                    (errorMessage) =>{
                         console.log("No scan. " + errorMessage);
                     }
                 );

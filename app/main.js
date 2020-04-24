@@ -22,5 +22,8 @@ Vue.registerElement(
 
 new Vue({
   store,
-  render: h => h('frame', [h(App)])
+  render: h => h('frame', [h(App)]),
+  async beforeCreate(){
+    store.dispatch("init");
+  }
 }).$start()

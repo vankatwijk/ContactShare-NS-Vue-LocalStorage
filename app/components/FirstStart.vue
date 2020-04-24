@@ -17,18 +17,18 @@
                 <Label class="drawer-item" text="Item 3"/>
             </StackLayout>
 
-            <GridLayout ~mainContent columns="*" rows="auto, auto, auto, auto, auto">
+            <GridLayout ~mainContent columns="*" rows="auto, auto, auto, auto, auto, auto, auto, auto, auto">
                 <Label row="0" class="message" text="some text" textWrap="true"></Label>
 
-                <TextField :text="personaldata.firstname" hint="First name" />
-                <TextField :text="personaldata.lastname" hint="Last name" />
-                <TextField :text="personaldata.street" hint="Street" />
-                <TextField :text="personaldata.zip" hint="zip" />
-                <TextField :text="personaldata.country" hint="country" />
-                <TextField :text="personaldata.phone" hint="phone" />
-                <TextField :text="personaldata.email" hint="email" />
+                <TextField row="1" v-model="personaldata.firstname" hint="First name" />
+                <TextField row="2" v-model="personaldata.lastname" hint="Last name" />
+                <TextField row="3" v-model="personaldata.street" hint="Street" />
+                <TextField row="4" v-model="personaldata.zip" hint="zip" />
+                <TextField row="5" v-model="personaldata.country" hint="country" />
+                <TextField row="6" v-model="personaldata.phone" hint="phone" />
+                <TextField row="7" v-model="personaldata.email" hint="email" />
 
-                <Button row="1" class="btn btn-primary btn-rounded-sm" text="Home" @tap="Save()"></Button>
+                <Button row="8" class="btn btn-primary btn-rounded-sm" text="Save" @tap="Save()"></Button>
 
             </GridLayout>
         </RadSideDrawer>
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+    import { mapGetters, mapState } from 'vuex'
     import Home from "./App";
     import {
         getBoolean,
@@ -54,16 +55,27 @@
     export default {
         data() {
             return {
-                msg: 'Hello World!',
-                personaldata:{}
+                personaldata:{
+                    firstname:'',
+                    lastname:'',
+                    street:'',
+                    zip:'',
+                    country:'',
+                    phone:'',
+                    email:''
+                }
             }
+        },
+        mounted() {
+            this.$store.dispatch("query");
+            this.personaldata = this.getUserData;
         },
         methods: {
             Save() {
 
                 setBoolean("isFirstRun",false);
 
-                let personaldata = this.personaldata;
+                // let personaldata =
                 // {
                 //     "firstname": this.personaldata.FirstName,
                 //     "lastname":this.personaldata.LastName,
@@ -73,6 +85,7 @@
                 //     "phone":this.personaldata.Phone,
                 //     "email":this.personaldata.Email
                 // };
+                this.$store.dispatch("insert", this.personaldata);
                 
 
                 this.$navigateTo(Home, {
@@ -84,6 +97,12 @@
                     }
                 });
             }
+        },
+        computed:{
+            ...mapGetters(["getUserData"]),
+            ...mapState({
+                data:state => state.data
+            })
         }
     }
 </script>

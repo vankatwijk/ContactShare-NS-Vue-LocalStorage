@@ -16,9 +16,16 @@
                 <Label class="drawer-item" text="Item 3"/>
             </StackLayout>
 
-            <GridLayout ~mainContent columns="*" rows="auto, auto, auto, auto, auto">
+            <GridLayout ~mainContent columns="*" rows="auto,*, auto">
                 <Label row="0" class="message" text="some text" textWrap="true"></Label>
-                <Button row="1" class="btn btn-primary btn-rounded-sm" text="Home" @tap="navigateToHome()"></Button>
+
+                <ListView row="1" for="item in scans" left="10" top="10" height="97%" width="100%" marginBottom="48" >
+                    <v-template>
+                        <Label :text="item.title" />
+                    </v-template>
+                </ListView>
+
+                <Button row="2" class="btn btn-primary btn-rounded-sm" text="Home" @tap="navigateToHome()"></Button>
 
             </GridLayout>
         </RadSideDrawer>
@@ -28,12 +35,16 @@
 </template>
 
 <script >
+  import { mapGetters, mapState } from 'vuex'
   import Home from "./App";
   export default {
     data() {
       return {
-        msg: 'Hello World!'
+        scans:[]
       }
+    },
+    mounted() {
+        this.scans = this.getScans;
     },
     methods: {
         navigateToHome(){
@@ -46,7 +57,10 @@
                 }
             });
         }
-    }
+    },
+        computed:{
+            ...mapGetters(["getScans"])
+        }
   }
 </script>
 
