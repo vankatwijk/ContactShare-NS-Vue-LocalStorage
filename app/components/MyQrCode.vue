@@ -26,6 +26,7 @@
 </template>
 
 <script >
+  import { mapGetters, mapState } from 'vuex'
   import Home from "./App";
   import ZXing from "nativescript-zxing";
 
@@ -40,10 +41,14 @@
     },
     methods: {
         generatebarcode(){
+
+
+
+
             var zx = new ZXing();
-            var img = zx.createBarcode({encode: "hello davide 1234567", height: 100, width: 100, format: ZXing.QR_CODE});
+            var img = zx.createBarcode({encode: JSON.stringify(this.getUserData), height: 100, width: 100, format: ZXing.QR_CODE});
             console.log('----------------------');
-            console.log(img);
+            console.log(JSON.stringify(this.getUserData));
             this.qrimage = img
 
         },
@@ -57,6 +62,12 @@
                 }
             });
         }
+    },
+    computed:{
+        ...mapGetters(["getUserData"]),
+        ...mapState({
+            data:state => state.data
+        })
     }
   }
 </script>

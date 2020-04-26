@@ -21,7 +21,8 @@
 
                 <ListView row="1" for="item in scans" left="10" top="10" height="97%" width="100%" marginBottom="48" >
                     <v-template>
-                        <Label :text="item.title" />
+                        <Label :text="item.firstname" />
+                        <Label :text="item.lastname" />
                     </v-template>
                 </ListView>
 
@@ -45,6 +46,7 @@
     },
     mounted() {
         this.scans = this.getScans;
+        console.log(this.getScans);
     },
     methods: {
         navigateToHome(){

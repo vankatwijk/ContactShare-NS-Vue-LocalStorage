@@ -44,17 +44,25 @@ export default new Vuex.Store({
         state.scans = [];
         for(var i = 0; i < data.data.length; i++) {
             state.scans.push({
-              title: data.data[i][0],
-              data: data.data[i][1],
-              timestamp: data.data[i][2],
+                firstname: data.data[i][0],
+                lastname: data.data[i][1],
+                street: data.data[i][2],
+                zip: data.data[i][3],
+                country: data.data[i][4],
+                phone: data.data[i][5],
+                email: data.data[i][6]
             });
         }
     },
     saveScans(state, data) {
       state.scans.push({
-        title: data.data.title,
-        data: data.data.data,
-        timestamp: data.data.timestamp,
+        firstname: data.data.firstname,
+        lastname: data.data.lastname,
+        street: data.data.street,
+        zip: data.data.zip,
+        country: data.data.country,
+        phone: data.data.phone,
+        email: data.data.email
       });
     },
   },
@@ -69,7 +77,7 @@ export default new Vuex.Store({
           });
 
 
-          await db.execSQL("CREATE TABLE IF NOT EXISTS scans (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, data BLOB, timestamp NUMERIC)").then(id => {
+          await db.execSQL("CREATE TABLE IF NOT EXISTS scans (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT, street TEXT, zip TEXT, country TEXT, phone TEXT, email TEXT)").then(id => {
             console.log("SCAN HISTORY");
           }, error => {
               console.log("CREATE SCAN HISTORY TABLE ERROR", error);
