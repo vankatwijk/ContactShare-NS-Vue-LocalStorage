@@ -17,4 +17,7 @@ android {
   aaptOptions {
     additionalParameters "--no-version-vectors"
   }
+  configurations {
+    compile.exclude group: 'com.google.zxing'
+  }
 }

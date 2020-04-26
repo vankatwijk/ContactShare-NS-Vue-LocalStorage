@@ -17,7 +17,7 @@
             </StackLayout>
 
             <GridLayout ~mainContent columns="*" rows="auto, auto, auto, auto, auto">
-                <Image row="0" src="https://play.nativescript.org/dist/assets/img/NativeScript_logo.png" />
+                <Image row="0" :src="qrimage" />
                 <Button row="1" class="btn btn-primary btn-rounded-sm" text="Home" @tap="navigateToHome()"></Button>
             </GridLayout>
         </RadSideDrawer>
@@ -27,17 +27,25 @@
 
 <script >
   import Home from "./App";
+  import ZXing from "nativescript-zxing";
 
   export default {
     data() {
       return {
+          qrimage:null
       }
     },
+    mounted() {
+        this.generatebarcode();
+    },
     methods: {
-        onImageLoaded(){
-            const image = args.object;
-            const result = new QrGenerator().generate('Hello World');
-            image.imageSource = new ImageSource(result);
+        generatebarcode(){
+            var zx = new ZXing();
+            var img = zx.createBarcode({encode: "hello davide 1234567", height: 100, width: 100, format: ZXing.QR_CODE});
+            console.log('----------------------');
+            console.log(img);
+            this.qrimage = img
+
         },
         navigateToHome(){
             this.$navigateTo(Home, {

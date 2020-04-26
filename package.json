@@ -24,6 +24,7 @@
     "nativescript-ui-sidedrawer": "^8.0.1",
     "nativescript-vue": "^2.6.1",
     "nativescript-vue-devtools": "^1.4.0",
+    "nativescript-zxing": "^1.5.9",
     "tns-core-modules": "^6.5.1",
     "vuex": "^3.3.0"
   },
