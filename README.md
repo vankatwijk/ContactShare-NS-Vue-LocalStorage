@@ -7,6 +7,10 @@ Contact sharing app using Qr codes to transmite contact information around
 Proof of concept app that scans a qr code containing contact information and generate a qr code to transfer your information to another user. the app is build with nativescript, vue ,nativescript-zxing(generating a qr code) and nativescript-barcodescanner(reading a barcode with the camera)
 
 ## Sreenshots
+| home  | myinfo | qr scanner | my qr |
+| -------------- | ------------- | ------------- | ------------- |
+| <img src="https://github.com/vankatwijk/ContactShare-NS/blob/master/readmeImage/home.png"> | <img src="https://github.com/vankatwijk/ContactShare-NS/blob/master/readmeImage/my-information.png"> | <img src="https://github.com/vankatwijk/ContactShare-NS/blob/master/readmeImage/qrscanner.png"> | <img src="https://github.com/vankatwijk/ContactShare-NS/blob/master/readmeImage/myqr.png"> |
+
 
 
 ## Features
@@ -35,7 +39,37 @@ tns debug <platform>
 tns build <platform> --env.production
 
 ```
+## bugs
+```
+if you clone the repo there should be no issues, but if you for some resone need to reset the app resources, please check the below issues
 
+there is a 'Duplicate class com.google.zxing.qrcode.encoder.QRCode found in modules core-3.3.0.jar' bug that arises from using the above 2 plugins , 
+the solution is to add to your /app/App_Resources/Android/app.gradle
+
+  configurations {
+    compile.exclude group: 'com.google.zxing'
+  }
+  
+My full app gradle is :
+android {
+  defaultConfig {
+    minSdkVersion 17
+    generatedDensities = []
+  }
+  aaptOptions {
+    additionalParameters "--no-version-vectors"
+  }
+  configurations {
+    compile.exclude group: 'com.google.zxing'
+  }
+}
+
+if you still get an error try this :
+open up where the plugin was installed (node_modules/nativescript-zxing) and then delete the platforms/android folder inside my plugin.
+
+
+  
+```
 ## Authors
 
 * **Hendrikus van Katwijk** - [Github](https://github.com/vankatwijk) - [Personal website](https://hpvk.com)
