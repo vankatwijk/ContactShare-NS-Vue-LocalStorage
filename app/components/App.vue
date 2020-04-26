@@ -31,15 +31,17 @@
                     v-if="isIOS">
                 </BarcodeScanner> -->
 
-                <Button row="1" class="btn btn-primary btn-rounded-sm" text="Scan place"
+                <Button row="1" class="btn btn-primary btn-rounded-sm" text="Scan contact"
                     @tap="doScanWithBackCamera"></Button>
-                <Button row="2" class="btn btn-primary btn-rounded-sm" text="Places" @tap="navigateToPlaces()"></Button>
+                <Button row="2" class="btn btn-primary btn-rounded-sm" text="Contacts" @tap="navigateToContacts()"></Button>
                 <Button row="3" class="btn btn-primary btn-rounded-sm" text="Notification"
                     @tap="navigateToNotifications()"></Button>
                 <Button row="4" class="btn btn-primary btn-rounded-sm" text="Information"
                     @tap="navigateToInformations()"></Button>
                 <Button row="4" class="btn btn-primary btn-rounded-sm" text="My Information"
                     @tap="navigateToMyInformation()"></Button>
+                <Button row="4" class="btn btn-primary btn-rounded-sm" text="My Qr Code"
+                    @tap="navigateToMyQrCode()"></Button>
                 <!-- <Button row="3" class="btn btn-primary btn-rounded-sm" text="front camera, no flip" @tap="doScanWithFrontCamera"></Button> -->
 
             </GridLayout>
@@ -56,10 +58,11 @@
     import {
         BarcodeScanner
     } from "nativescript-barcodescanner";
-    import Places from "./Places";
+    import Contacts from "./Contacts";
     import Notification from "./Notification";
     import Information from "./Information";
     import FirstStart from "./FirstStart";
+    import MyQrCode from "./MyQrCode";
     import {
         getBoolean,
         setBoolean,
@@ -90,8 +93,8 @@
             }
         },
         methods: {
-            navigateToPlaces() {
-                this.$navigateTo(Places, {
+            navigateToContacts() {
+                this.$navigateTo(Contacts, {
                     animated: true,
                     transition: {
                         name: "slideLeft",
@@ -122,6 +125,16 @@
             },
             navigateToMyInformation() {
                 this.$navigateTo(FirstStart, {
+                    animated: true,
+                    transition: {
+                        name: "slideLeft",
+                        duration: 250,
+                        curve: "easeIn"
+                    }
+                });
+            },
+            navigateToMyQrCode() {
+                this.$navigateTo(MyQrCode, {
                     animated: true,
                     transition: {
                         name: "slideLeft",
