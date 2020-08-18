@@ -67,26 +67,15 @@
             }
         },
         mounted() {
-            this.$store.dispatch("query");
-            this.personaldata = this.getUserData;
-            console.log();
+            this.personaldata = this.getProfileData;
+            console.log('getting data----------------------------');
+            console.log(this.getProfileData);
         },
         methods: {
             Save() {
 
                 setBoolean("isFirstRun",false);
-
-                // let personaldata =
-                // {
-                //     "firstname": this.personaldata.FirstName,
-                //     "lastname":this.personaldata.LastName,
-                //     "street":this.personaldata.Street,
-                //     "zip":this.personaldata.ZIP,
-                //     "country":this.personaldata.Country,
-                //     "phone":this.personaldata.Phone,
-                //     "email":this.personaldata.Email
-                // };
-                this.$store.dispatch("insert", this.personaldata);
+                this.$store.dispatch("insertProfile", this.personaldata);
                 
 
                 this.$navigateTo(Home, {
@@ -100,7 +89,7 @@
             }
         },
         computed:{
-            ...mapGetters(["getUserData"]),
+            ...mapGetters(["getProfileData"]),
             ...mapState({
                 data:state => state.data
             })

@@ -46,9 +46,9 @@
 
 
             var zx = new ZXing();
-            var img = zx.createBarcode({encode: JSON.stringify(this.getUserData), height: 100, width: 100, format: ZXing.QR_CODE});
+            var img = zx.createBarcode({encode: JSON.stringify(this.getProfileData), height: 100, width: 100, format: ZXing.QR_CODE});
             console.log('----------------------');
-            console.log(JSON.stringify(this.getUserData));
+            console.log(JSON.stringify(this.getProfileData));
             this.qrimage = img
 
         },
@@ -64,10 +64,7 @@
         }
     },
     computed:{
-        ...mapGetters(["getUserData"]),
-        ...mapState({
-            data:state => state.data
-        })
+        ...mapGetters(["getProfileData"])
     }
   }
 </script>

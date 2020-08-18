@@ -172,7 +172,7 @@
                         // Note that this Promise is never invoked when a 'continuousScanCallback' function is provided
 
                         let contactdata = JSON.parse(result.text);
-                        this.$store.dispatch("insertScan",{
+                        this.$store.dispatch("insertContact",{
                             title: "Some Place",
                             data: result,
                             timestamp: Date.now()

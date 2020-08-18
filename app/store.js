@@ -12,17 +12,30 @@ export default new Vuex.Store({
   },
   mutations: {
     init(state, data) {
-      state.profile = JSON.parse(appSettings.getString("profile"));
-      state.contacts = JSON.parse(appSettings.getString("contacts"));
+      state.profile = JSON.parse(appSettings.getString("profile",{}));
+      state.contacts = JSON.parse(appSettings.getString("contacts",[]));
+      console.log('init------------------------------');
+      console.log(state.profile);
+      console.log(state.contacts);
     },
     saveProfile(state, data) {
         state.profile = data.data;
         appSettings.setString("profile",JSON.stringify(data.data));
     },
     saveContacts(state, data) {
+      console.log('saving contact------------------------');
       state.contacts.push(data.data);
+
+      console.log(state.contacts);
       appSettings.setString("contacts",JSON.stringify(state.contacts));
     },
+    clearAllData(state, data) {
+        state.profile = {};
+        state.contacts = [];
+        appSettings.setString("profile",{});
+        appSettings.setString("contacts",[]);
+        appSettings.setBoolean("isFirstRun",true);
+    }
   },
   actions: {
     init(context) {
@@ -41,11 +54,14 @@ export default new Vuex.Store({
         context.commit("saveProfile", { data: tempProfile });
     },
     insertContact(context, data) {
-      context.commit("saveContacts", { data: data });
+      context.commit("saveContacts", { data: data.data.text });
+    },
+    clearData(context) {
+      context.commit("clearAllData");
     }
   },
   getters: {
       getProfileData: (state) => state.profile,
-      getContacts: (state) => state.Contact,
+      getContacts: (state) => state.contacts,
   }
 });
