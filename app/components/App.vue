@@ -16,7 +16,7 @@
                 <Label class="drawer-item" text="Item 3" />
             </StackLayout>
 
-            <GridLayout ~mainContent columns="*" rows="auto, auto, auto, auto, auto, auto">
+            <GridLayout ~mainContent columns="*" rows="auto, auto, auto, auto, auto, auto, auto">
                 <Label row="0" class="message" text="Check the console log for scanned barcodes"
                     textWrap="true"></Label>
 
@@ -36,9 +36,9 @@
                 <Button row="2" class="btn btn-primary btn-rounded-sm" text="Contacts" @tap="navigateToContacts()"></Button>
                 <Button row="4" class="btn btn-primary btn-rounded-sm" text="Information"
                     @tap="navigateToInformations()"></Button>
-                <Button row="4" class="btn btn-primary btn-rounded-sm" text="My Information"
+                <Button row="5" class="btn btn-primary btn-rounded-sm" text="My Information"
                     @tap="navigateToMyInformation()"></Button>
-                <Button row="5" class="btn btn-primary btn-rounded-sm" text="My Qr Code"
+                <Button row="6" class="btn btn-primary btn-rounded-sm" text="My Qr Code"
                     @tap="navigateToMyQrCode()"></Button>
                 <!-- <Button row="3" class="btn btn-primary btn-rounded-sm" text="front camera, no flip" @tap="doScanWithFrontCamera"></Button> -->
 

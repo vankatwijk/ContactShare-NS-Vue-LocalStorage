@@ -32,8 +32,8 @@ export default new Vuex.Store({
     clearAllData(state, data) {
         state.profile = {};
         state.contacts = [];
-        appSettings.setString("profile",{});
-        appSettings.setString("contacts",[]);
+        appSettings.setString("profile","{}");
+        appSettings.setString("contacts","[]");
         appSettings.setBoolean("isFirstRun",true);
     }
   },

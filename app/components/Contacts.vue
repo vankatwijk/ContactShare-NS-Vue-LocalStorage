@@ -19,12 +19,11 @@
             <GridLayout ~mainContent columns="*" rows="auto,*, auto">
                 <Label row="0" class="message" text="some text" textWrap="true"></Label>
 
-                <!-- <ListView row="1" for="item in scans" left="10" top="10" height="97%" width="100%" marginBottom="48" >
+                <ListView row="1" for="item in contacts" left="10" top="10" height="97%" width="100%" marginBottom="48" >
                     <v-template>
-                        <Label :text="item.firstname" />
-                        <Label :text="item.lastname" />
+                        <Label :text="(JSON.parse(item)).firstname+'  '+(JSON.parse(item)).lastname" />
                     </v-template>
-                </ListView> -->
+                </ListView>
 
                 <Button row="2" class="btn btn-primary btn-rounded-sm" text="Home" @tap="navigateToHome()"></Button>
 
@@ -41,11 +40,11 @@
   export default {
     data() {
       return {
-        scans:[]
+        contacts:[]
       }
     },
     mounted() {
-        this.scans = this.getContacts;
+        this.contacts = this.getContacts;
         console.log('displaying contacts list-----------------------');
         console.log(this.getContacts);
     },
