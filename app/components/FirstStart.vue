@@ -69,6 +69,7 @@
         mounted() {
             this.$store.dispatch("query");
             this.personaldata = this.getUserData;
+            console.log();
         },
         methods: {
             Save() {
