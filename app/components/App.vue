@@ -1,13 +1,16 @@
 <template>
     <Page>
-        <ActionBar backgroundColor="#44557f" flat="true">
-            <StackLayout orientation="vertical" width="100%" height="100%" backgroundColor="#44557f">
-                <StackLayout backgroundColor="#44557f">
-                    <StackLayout #searchRow orientation="horizontal" marginTop="5">
-                        <TextField backgroundColor="white" paddingLeft="20" borderRadius="20" v-model="textFieldValue"
+        <ActionBar backgroundColor="#C08497" flat="true">
+            <StackLayout orientation="vertical" width="100%" height="100%">
+                <StackLayout>
+
+                    <StackLayout orientation="horizontal" marginTop="5">
+                        <TextField backgroundColor="white" paddingLeft="20" borderRadius="20"
                             width="80%" height="40" fontSize="14" hint="Search"></TextField>
-                        <Image src="~/assets/images/shape4@3x.png" height="30" width="30" marginLeft="10"></Image>
+                        <Label style="font-size: 30;" 
+                        class="fa" :text="'fa-search' | fonticon" />
                     </StackLayout>
+
                 </StackLayout>
             </StackLayout>
         </ActionBar>
@@ -20,7 +23,10 @@
 
                         <ListView row="1" for="item in contacts" left="10" top="10" height="97%" width="100%" marginBottom="48" >
                             <v-template>
-                                <Label :text="item" />
+                                <StackLayout>
+                                    <Label :text="(JSON.parse(item)).firstname+'  '+(JSON.parse(item)).lastname" />
+                                    <Label :text="(JSON.parse(item)).phone+' : '+(JSON.parse(item)).email" />
+                                </StackLayout>
                             </v-template>
                         </ListView>
 
@@ -34,39 +40,25 @@
 </template>
 
 <script>
+    import { mapGetters, mapState } from 'vuex'
     import {
         isIOS
     } from "tns-core-modules/platform";
-
-
-
     export default {
         name: "homeComponent",
         data() {
             return {
                 isIOS,
-                contacts:[
-                    {
-                        "firstname":"1",
-                        "lastname":"1"
-                    },
-                    {
-                        "firstname":"2",
-                        "lastname":"2"
-                    },
-                    {
-                        "firstname":"3",
-                        "lastname":"3"
-                    },
-                    {
-                        "firstname":"4",
-                        "lastname":"4"
-                    }
-                ]
+                contacts:[]
             }
         },
         mounted() {
-
+            this.contacts = this.getContacts;
+            console.log('displaying contacts list-----------------------');
+            console.log(this.getContacts);
+        },
+        computed:{
+            ...mapGetters(["getContacts"])
         }
     }
 </script>

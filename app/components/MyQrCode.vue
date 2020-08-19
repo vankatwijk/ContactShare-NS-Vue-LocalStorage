@@ -1,6 +1,6 @@
 <template>
     <Page>
-        <ActionBar backgroundColor="#44557f" flat="true">
+        <ActionBar backgroundColor="#C08497" flat="true">
             <StackLayout orientation="vertical" width="100%" height="100%" backgroundColor="#44557f">
                 <StackLayout backgroundColor="#44557f">
                     <StackLayout #searchRow orientation="horizontal" marginTop="5">

@@ -1,10 +1,15 @@
 <template>
     <Page>
-        <ActionBar>
-            <GridLayout width="100%" columns="auto, *">
-                <Label text="MENU" @tap="$refs.drawer.nativeView.showDrawer()" col="0" />
-                <Label class="title" text="Welcome to NativeScript-Vue!" col="1" />
-            </GridLayout>
+        <ActionBar backgroundColor="#C08497" flat="true">
+            <StackLayout orientation="vertical" width="100%" height="100%" backgroundColor="#44557f">
+                <StackLayout backgroundColor="#44557f">
+                    <StackLayout #searchRow orientation="horizontal" marginTop="5">
+                        <TextField backgroundColor="white" paddingLeft="20" borderRadius="20" v-model="textFieldValue"
+                            width="80%" height="40" fontSize="14" hint="Search"></TextField>
+                        <Image src="~/assets/images/shape4@3x.png" height="30" width="30" marginLeft="10"></Image>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
         </ActionBar>
 
 
