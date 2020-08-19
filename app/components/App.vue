@@ -21,9 +21,9 @@
             <template  slot="mainContent">
                     <ScrollView orientation="vertical">
 
-                        <ListView row="1" for="item in contacts" left="10" top="10" height="97%" width="100%" marginBottom="48" >
+                        <ListView row="1" for="(item,key) in contacts" left="10" top="10" height="97%" width="100%" marginBottom="48" >
                             <v-template>
-                                <StackLayout>
+                                <StackLayout @tap="navigateToContact(key,(JSON.parse(item)))">
                                     <Label :text="(JSON.parse(item)).firstname+'  '+(JSON.parse(item)).lastname" />
                                     <Label :text="(JSON.parse(item)).phone+' : '+(JSON.parse(item)).email" />
                                 </StackLayout>
@@ -44,18 +44,44 @@
     import {
         isIOS
     } from "tns-core-modules/platform";
+    import Contact from "./Contact";
+
+
     export default {
         name: "homeComponent",
         data() {
             return {
                 isIOS,
-                contacts:[]
+                contacts:[
+                    {
+                        "firstname":"piet",
+                        "lastname":"jack"
+                    }
+                ]
             }
         },
         mounted() {
             this.contacts = this.getContacts;
             console.log('displaying contacts list-----------------------');
             console.log(this.getContacts);
+        },
+        methods:{
+            navigateToContact(contactKey1,contactObject1){
+
+                this.$navigateTo(Contact, {
+                    animated: true,
+                    transition: {
+                        name: "fade",
+                        duration: 250,
+                        curve: "easeIn"
+                    },
+                    props: {
+                        contactKey: contactKey1,
+                        contactObject: contactObject1
+                    }
+                });
+
+            }
         },
         computed:{
             ...mapGetters(["getContacts"])

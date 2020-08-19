@@ -48,7 +48,6 @@
     import {
         BarcodeScanner
     } from "nativescript-barcodescanner";
-    import Contacts from "../Contacts";
     import Notification from "../Notification";
     import Information from "../Information";
     import FirstStart from "../FirstStart";
