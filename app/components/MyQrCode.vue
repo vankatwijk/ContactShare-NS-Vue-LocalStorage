@@ -30,7 +30,12 @@
   import Home from "./App";
   import ZXing from "nativescript-zxing";
 
+  import mainComponent from "./layouts/main";
+
   export default {
+    components: {
+        mainComponent
+    },
     data() {
       return {
           qrimage:null

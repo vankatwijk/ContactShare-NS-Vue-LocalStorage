@@ -18,6 +18,7 @@
     "@nativescript/theme": "^2.2.1",
     "@vue/devtools": "^5.3.3",
     "nativescript-barcodescanner": "^3.4.2",
+    "nativescript-fonticon": "^2.0.2",
     "nativescript-socketio": "^3.3.1",
     "nativescript-sqlite": "^2.6.3",
     "nativescript-toasty": "^3.0.0-alpha.2",
