@@ -1,39 +1,41 @@
 <template>
     <Page>
-        <ActionBar>
-            <GridLayout width="100%" columns="auto, *">
-                <Label text="MENU" @tap="$refs.drawer.nativeView.showDrawer()" col="0" />
-                <Label class="title" text="Welcome to NativeScript-Vue!" col="1" />
-            </GridLayout>
+        <ActionBar backgroundColor="#44557f" flat="true">
+            <StackLayout orientation="vertical" width="100%" height="100%" backgroundColor="#44557f">
+                <StackLayout backgroundColor="#44557f">
+                    <StackLayout #searchRow orientation="horizontal" marginTop="5">
+                        <TextField backgroundColor="white" paddingLeft="20" borderRadius="20" v-model="textFieldValue"
+                            width="80%" height="40" fontSize="14" hint="Search"></TextField>
+                        <Image src="~/assets/images/shape4@3x.png" height="30" width="30" marginLeft="10"></Image>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
         </ActionBar>
 
+        <mainComponent 
+        :selectedPage="4"
+        >
+            <template  slot="mainContent">
 
-        <RadSideDrawer ref="drawer">
-            <StackLayout ~drawerContent backgroundColor="#ffffff">
-                <Label class="drawer-header" text="Drawer"/>
+                <GridLayout columns="*" rows="auto, auto, auto, auto, auto, auto, auto, auto, auto, auto">
+                    <Label row="0" class="message" text="some text" textWrap="true"></Label>
 
-                <Label class="drawer-item" text="Item 1"/>
-                <Label class="drawer-item" text="Item 2"/>
-                <Label class="drawer-item" text="Item 3"/>
-            </StackLayout>
+                    <TextField row="1" v-model="personaldata.firstname" hint="First name" />
+                    <TextField row="2" v-model="personaldata.lastname" hint="Last name" />
+                    <TextField row="3" v-model="personaldata.street" hint="Street" />
+                    <TextField row="4" v-model="personaldata.zip" hint="zip" />
+                    <TextField row="5" v-model="personaldata.country" hint="country" />
+                    <TextField row="6" v-model="personaldata.phone" hint="phone" />
+                    <TextField row="7" v-model="personaldata.email" hint="email" />
 
-            <GridLayout ~mainContent columns="*" rows="auto, auto, auto, auto, auto, auto, auto, auto, auto, auto">
-                <Label row="0" class="message" text="some text" textWrap="true"></Label>
+                    <Button row="8" class="btn btn-primary btn-rounded-sm" text="Save" @tap="Save()"></Button>
+                    <Button row="9" class="btn btn-danger btn-rounded-sm" text="Clear all data" @tap="clearAllUserData()"></Button>
 
-                <TextField row="1" v-model="personaldata.firstname" hint="First name" />
-                <TextField row="2" v-model="personaldata.lastname" hint="Last name" />
-                <TextField row="3" v-model="personaldata.street" hint="Street" />
-                <TextField row="4" v-model="personaldata.zip" hint="zip" />
-                <TextField row="5" v-model="personaldata.country" hint="country" />
-                <TextField row="6" v-model="personaldata.phone" hint="phone" />
-                <TextField row="7" v-model="personaldata.email" hint="email" />
+                </GridLayout>
 
-                <Button row="8" class="btn btn-primary btn-rounded-sm" text="Save" @tap="Save()"></Button>
-                <Button row="9" class="btn btn-danger btn-rounded-sm" text="Clear all data" @tap="clearAllUserData()"></Button>
+            </template>
 
-            </GridLayout>
-        </RadSideDrawer>
-
+        </mainComponent>
 
 
     </Page>
@@ -54,6 +56,7 @@
         clear} from "tns-core-modules/application-settings";
 
     export default {
+        name: "informationComponent",
         data() {
             return {
                 personaldata:{

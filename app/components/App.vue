@@ -12,7 +12,7 @@
             </StackLayout>
         </ActionBar>
 
-        <main-component 
+        <mainComponent 
         :selectedPage="1"
         >
             <template  slot="mainContent">
@@ -28,7 +28,7 @@
 
             </template>
 
-        </main-component>
+        </mainComponent>
 
     </Page>
 </template>
@@ -38,13 +38,10 @@
         isIOS
     } from "tns-core-modules/platform";
 
-    import mainComponent from "./layouts/main";
 
 
     export default {
-        components: {
-            mainComponent
-        },
+        name: "homeComponent",
         data() {
             return {
                 isIOS,

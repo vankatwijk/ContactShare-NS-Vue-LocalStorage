@@ -5,14 +5,14 @@
         <GridLayout orientation="vertical" width="100%" height="100%" columns="*" rows="*,auto">
 
 
-            <StackLayout col="0" row="0" backgroundColor="#f8f8f8">
+            <StackLayout col="0" row="0">
                 <slot name="mainContent"></slot>
             </StackLayout>
 
-            <StackLayout col="0" row="1" orientation="horizontal" backgroundColor="#FFFFFF" height="60">
+            <StackLayout col="0" row="1" orientation="horizontal" height="60">
                 <GridLayout rows="*" columns="*,*,*,*,*">
 
-                    <StackLayout col="0" row="0" @tap="navigateToContacts()" :backgroundColor="selectedPage===1?'#C08497':''">
+                    <StackLayout col="0" row="0" @tap="navigateToHome()" :backgroundColor="selectedPage===1?'#C08497':''">
                         <Label height="25" width="25" margin="10" style="font-size: 25"
                         class="fa" :text="'fa-list' | fonticon" />
                     </StackLayout>
@@ -24,11 +24,11 @@
                         <Label height="25" width="25" margin="10" style="font-size: 25" 
                         class="fa" :text="'fa-camera-retro' | fonticon" />
                     </StackLayout>                    
-                    <StackLayout col="3" row="0" @tap="navigateToMyInformations()" :backgroundColor="selectedPage===4?'#C08497':''">
+                    <StackLayout col="3" row="0" @tap="navigateToInformations()" :backgroundColor="selectedPage===4?'#C08497':''">
                         <Label height="25" width="25" margin="10" style="font-size: 25" 
                         class="fa" :text="'fa-contao' | fonticon" />
                     </StackLayout>                    
-                    <StackLayout col="4" row="0" @tap="navigateToInformation()" :backgroundColor="selectedPage===5?'#C08497':''">
+                    <StackLayout col="4" row="0" @tap="navigateToMyInformation()" :backgroundColor="selectedPage===5?'#C08497':''">
                         <Label height="25" width="25" margin="10" style="font-size: 25" 
                         class="fa" :text="'fa-cog' | fonticon" />
                     </StackLayout>
@@ -53,6 +53,7 @@
     import Information from "../Information";
     import FirstStart from "../FirstStart";
     import MyQrCode from "../MyQrCode";
+    import Home from "../App";
 
     import {
         getBoolean,
@@ -66,6 +67,7 @@
         clear} from "tns-core-modules/application-settings";
 
     export default {
+        name: "mainComponent",
         props:{
             selectedPage:Number
         },
@@ -73,12 +75,12 @@
             return {}
         },
         methods: {
-            navigateToContacts() {
-                (selectedPage!==1){
-                    this.$navigateTo(Contacts, {
+            navigateToHome() {
+                if(this.selectedPage!==1){
+                    this.$navigateTo(Home, {
                         animated: true,
                         transition: {
-                            name: "slideLeft",
+                            name: "fade",
                             duration: 250,
                             curve: "easeIn"
                         }
@@ -89,18 +91,18 @@
                 this.$navigateTo(Notification, {
                     animated: true,
                     transition: {
-                        name: "slideLeft",
+                        name: "fade",
                         duration: 250,
                         curve: "easeIn"
                     }
                 });
             },
             navigateToInformations() {
-                (selectedPage!==4){
+                if(this.selectedPage!==4){
                     this.$navigateTo(Information, {
                         animated: true,
                         transition: {
-                            name: "slideLeft",
+                            name: "fade",
                             duration: 250,
                             curve: "easeIn"
                         }
@@ -108,11 +110,11 @@
                 }
             },
             navigateToMyInformation() {
-                (selectedPage!==5){
+                if(this.selectedPage!==5){
                     this.$navigateTo(FirstStart, {
                         animated: true,
                         transition: {
-                            name: "slideLeft",
+                            name: "fade",
                             duration: 250,
                             curve: "easeIn"
                         }
@@ -120,11 +122,11 @@
                 }
             },
             navigateToMyQrCode() {
-                (selectedPage!==2){
+                if(this.selectedPage!==2){
                     this.$navigateTo(MyQrCode, {
                         animated: true,
                         transition: {
-                            name: "slideLeft",
+                            name: "fade",
                             duration: 250,
                             curve: "easeIn"
                         }

@@ -21,6 +21,8 @@ import store from './store'
 // Prints Vue logs when --env.production is *NOT* set while building
 Vue.config.silent = (TNS_ENV === 'production')
 
+Vue.component('mainComponent', require('./components/layouts/main').default);
+
 Vue.registerElement(
   'RadSideDrawer',
   () => require('nativescript-ui-sidedrawer').RadSideDrawer
