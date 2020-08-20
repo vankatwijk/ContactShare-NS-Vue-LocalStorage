@@ -70,6 +70,21 @@ open up where the plugin was installed (node_modules/nativescript-zxing) and the
 
   
 ```
+## Usefull final tns build commands
+```
+some usefull tns commands for final build :
+tns resources generate splashes '/readmeImage/logo.png' --background "#C08497"
+tns resources generate icons '/readmeImage/icon.png'
+
+changing all name :
+/app/App_Resources/Android/src/main/res/values-v21/strings.xml
+<resources>
+    <string name="app_name">Qr-contact</string>
+    <string name="title_activity_kimera">Qr-contact</string>
+</resources>
+
+  
+```
 ## Authors
 
 * **Hendrikus van Katwijk** - [Github](https://github.com/vankatwijk) - [Personal website](https://hpvk.com)
