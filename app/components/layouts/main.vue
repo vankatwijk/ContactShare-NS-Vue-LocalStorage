@@ -164,7 +164,7 @@
 
                         this.$store.dispatch("insertContact",{
                             title: "Some Place",
-                            data: result.text,
+                            data: JSON.parse(result.text),
                             timestamp: Date.now()
                         });
 
