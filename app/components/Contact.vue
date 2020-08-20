@@ -38,7 +38,7 @@
     },
     mounted() {
         this.personaldata = this.contactObject;
-        console.log('displaying contacts list-----------------------');
+        console.log('displaying contacts list contact-----------------------');
         console.log(this.contactObject);
         console.log(this.contactKey);
     },
@@ -52,16 +52,19 @@
                             data: this.personaldata,
                             timestamp: Date.now()
                         });
+                this.navigateToHome();
 
             }else{
 
                 this.$store.dispatch("updateContact", [this.contactKey,this.personaldata]);
+                this.navigateToHome();
             }
             
         },
         clearUserData(){
             
-            this.$store.dispatch("deleteContact", [this.contactKey,this.contactObject]);
+            this.$store.dispatch("deleteContact", [this.contactKey,this.personaldata]);
+            this.navigateToHome();
         },
         navigateToHome(){
             this.$navigateTo(Home, {

@@ -21,19 +21,14 @@
         :selectedPage="1"
         >
             <template  slot="mainContent">
-                    <ScrollView orientation="vertical">
-
-                        <ListView row="1" for="(item,key) in contacts" left="10" top="10" height="97%" width="100%" marginBottom="48" >
+                        <ListView row="1" for="(item,key) in contacts" key="item" left="10" top="10" height="97%" width="100%" marginBottom="48" >
                             <v-template>
-                                <StackLayout @tap="navigateToContact(key,item)">
+                                <StackLayout @tap="navigateToContact(key,item)" >
                                     <Label :text="item.firstname+'  '+item.lastname" />
                                     <Label :text="item.phone+' : '+item.email" />
                                 </StackLayout>
                             </v-template>
                         </ListView>
-
-                    </ScrollView>
-
             </template>
 
         </mainComponent>
@@ -59,7 +54,7 @@
         },
         mounted() {
             this.contacts = this.getContacts;
-            console.log('displaying contacts list-----------------------');
+            console.log('displaying contacts list app-----------------------');
             console.log(this.getContacts);
         },
         methods:{

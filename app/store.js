@@ -29,7 +29,10 @@ export default new Vuex.Store({
     updateContacts(state, data) {
       state.contacts[data.key] = data.contact;
       appSettings.setString("contacts",JSON.stringify(state.contacts));
-
+    },
+    removeContact(state, data) {
+      state.contacts.splice(data.key, 1);
+      appSettings.setString("contacts",JSON.stringify(state.contacts));
     },
     clearAllData(state, data) {
         state.profile = {};
@@ -51,14 +54,9 @@ export default new Vuex.Store({
     },
     updateContact(context, [key,data]) {
       context.commit("updateContacts", { key: key,contact:data });
-
     },
-    deleteContact({ commit, state }, {key,data}) {
-      const index = state.contacts.indexOf(key);
-      if (index > -1) {
-        state.contacts.splice(index, 1);
-      }
-      appSettings.setString("contacts",JSON.stringify(state.contacts));
+    deleteContact(context, [key,data]) {
+      context.commit("removeContact", { key: key });
     },
     clearData(context) {
       context.commit("clearAllData");
