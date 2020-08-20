@@ -9,7 +9,7 @@ Proof of concept app that scans a qr code containing contact information and gen
 ## Sreenshots
 | home  | myinfo | qr scanner | my qr |
 | -------------- | ------------- | ------------- | ------------- |
-| <img src="https://github.com/vankatwijk/ContactShare-NS/blob/master/readmeImage/home.png"> | <img src="https://github.com/vankatwijk/ContactShare-NS/blob/master/readmeImage/my-information.png"> | <img src="https://github.com/vankatwijk/ContactShare-NS/blob/master/readmeImage/qrscanner.png"> | <img src="https://github.com/vankatwijk/ContactShare-NS/blob/master/readmeImage/myqr.png"> |
+| <img src="https://github.com/vankatwijk/ContactShare-NS-LocalStorage/blob/master/readmeImage/home.png"> | <img src="https://github.com/vankatwijk/ContactShare-NS-LocalStorage/blob/master/readmeImage/my-information.png"> | <img src="https://github.com/vankatwijk/ContactShare-NS-LocalStorage/blob/master/readmeImage/qrscanner.png"> | <img src="https://github.com/vankatwijk/ContactShare-NS-LocalStorage/blob/master/readmeImage/myqr.png"> |
 
 
 
