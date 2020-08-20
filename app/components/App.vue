@@ -7,7 +7,7 @@
                     <StackLayout orientation="horizontal" marginTop="5">
                         <Label style="font-size: 30;" @tap="navigateToContact('new',{})"
                         class="fa" :text="'fa-plus' | fonticon" />
-                        <TextField backgroundColor="white" paddingLeft="20" borderRadius="20"
+                        <TextField backgroundColor="white" paddingLeft="20" borderRadius="20" v-model="search"
                             width="60%" height="40" fontSize="14" hint="Search"></TextField>
                         <Label style="font-size: 30;" 
                         class="fa" :text="'fa-search' | fonticon" />
@@ -49,7 +49,8 @@
         data() {
             return {
                 isIOS,
-                contacts:[]
+                contacts:[],
+                search:""
             }
         },
         mounted() {
@@ -77,6 +78,21 @@
         },
         computed:{
             ...mapGetters(["getContacts"])
-        }
+        },
+        watch: {
+            search: function (newValue, oldValue) {
+                if(newValue === ''){
+                    this.contacts = this.getContacts;
+                }else{
+                    this.contacts = this.contacts.filter(function (e) {
+
+                        return (e.firstname === undefined? '' : e.firstname).includes(newValue) 
+                        || (e.lastname === undefined? '' : e.lastname).includes(newValue) 
+                        || (e.phone === undefined? '' : e.phone).includes(newValue)
+                        || (e.email === undefined? '' : e.email).includes(newValue)
+                    });
+                }
+            }
+        },
     }
 </script>
