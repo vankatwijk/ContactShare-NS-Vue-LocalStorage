@@ -162,10 +162,9 @@
                         console.log("--- scanned: " + result.text);
                         // Note that this Promise is never invoked when a 'continuousScanCallback' function is provided
 
-                        let contactdata = JSON.parse(result.text);
                         this.$store.dispatch("insertContact",{
                             title: "Some Place",
-                            data: result,
+                            data: result.text,
                             timestamp: Date.now()
                         });
 

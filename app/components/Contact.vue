@@ -44,7 +44,19 @@
     },
     methods: {
         Save(){
-            this.$store.dispatch("updateContact", [this.contactKey,this.contactObject]);
+            if(this.contactKey=== 'new'){
+
+                console.log(this.personaldata);
+                this.$store.dispatch("insertContact",{
+                            title: "Some Place",
+                            data: this.personaldata,
+                            timestamp: Date.now()
+                        });
+
+            }else{
+
+                this.$store.dispatch("updateContact", [this.contactKey,this.personaldata]);
+            }
             
         },
         clearUserData(){

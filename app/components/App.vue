@@ -5,8 +5,10 @@
                 <StackLayout>
 
                     <StackLayout orientation="horizontal" marginTop="5">
+                        <Label style="font-size: 30;" @tap="navigateToContact('new',{})"
+                        class="fa" :text="'fa-plus' | fonticon" />
                         <TextField backgroundColor="white" paddingLeft="20" borderRadius="20"
-                            width="80%" height="40" fontSize="14" hint="Search"></TextField>
+                            width="60%" height="40" fontSize="14" hint="Search"></TextField>
                         <Label style="font-size: 30;" 
                         class="fa" :text="'fa-search' | fonticon" />
                     </StackLayout>
@@ -23,9 +25,9 @@
 
                         <ListView row="1" for="(item,key) in contacts" left="10" top="10" height="97%" width="100%" marginBottom="48" >
                             <v-template>
-                                <StackLayout @tap="navigateToContact(key,(JSON.parse(item)))">
-                                    <Label :text="(JSON.parse(item)).firstname+'  '+(JSON.parse(item)).lastname" />
-                                    <Label :text="(JSON.parse(item)).phone+' : '+(JSON.parse(item)).email" />
+                                <StackLayout @tap="navigateToContact(key,item)">
+                                    <Label :text="item.firstname+'  '+item.lastname" />
+                                    <Label :text="item.phone+' : '+item.email" />
                                 </StackLayout>
                             </v-template>
                         </ListView>
@@ -52,12 +54,7 @@
         data() {
             return {
                 isIOS,
-                contacts:[
-                    {
-                        "firstname":"piet",
-                        "lastname":"jack"
-                    }
-                ]
+                contacts:[]
             }
         },
         mounted() {

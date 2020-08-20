@@ -23,15 +23,13 @@ export default new Vuex.Store({
         appSettings.setString("profile",JSON.stringify(data.data));
     },
     saveContacts(state, data) {
-      console.log('saving contact------------------------');
       state.contacts.push(data.data);
-
-      console.log(state.contacts);
       appSettings.setString("contacts",JSON.stringify(state.contacts));
     },
     updateContacts(state, data) {
       state.contacts[data.key] = data.contact;
       appSettings.setString("contacts",JSON.stringify(state.contacts));
+
     },
     clearAllData(state, data) {
         state.profile = {};
@@ -46,22 +44,13 @@ export default new Vuex.Store({
           context.commit("init");
     },
     insertProfile(context, data) {
-        let tempProfile = {
-            "firstname":data.firstname,
-            "lastname":data.lastname,
-            "street":data.street,
-            "zip":data.zip,
-            "country":data.country,
-            "phone":data.phone,
-            "email":data.email
-        }
-        context.commit("saveProfile", { data: tempProfile });
+        context.commit("saveProfile", { data: data });
     },
     insertContact(context, data) {
-      context.commit("saveContacts", { data: data.data.text });
+      context.commit("saveContacts", { data: data.data });
     },
     updateContact(context, [key,data]) {
-      context.commit("updateContacts", { key: key,data:data });
+      context.commit("updateContacts", { key: key,contact:data });
 
     },
     deleteContact({ commit, state }, {key,data}) {
